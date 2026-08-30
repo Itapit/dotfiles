@@ -1,6 +1,6 @@
--- conf/monitors.lua — monitor layout (migrated from monitors.conf + conf/monitors/default.conf)
--- Static config: eDP-1 (laptop) + HDMI-A-1 (external). Edit here for your setup.
--- Fallback "preferred,auto,1" is not needed when explicit monitors are defined.
+-- conf/monitors.lua — monitor layout
+-- https://wiki.hypr.land/Configuring/Basics/Monitors/
+-- Edit output/mode/position/scale for your setup. nwg-displays writes to this file format.
 
 hl.monitor({
   output   = "eDP-1",
@@ -16,5 +16,5 @@ hl.monitor({
   scale    = 1.0,
 })
 
--- Fallback for any other monitor not explicitly listed:
--- hl.monitor({ output = "", mode = "preferred", position = "auto", scale = 1.0 })
+-- Fallback for any unlisted monitor:
+-- hl.monitor({ output = "", mode = "preferred", position = "auto", scale = "auto" })

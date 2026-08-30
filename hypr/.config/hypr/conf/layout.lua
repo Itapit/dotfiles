@@ -1,16 +1,16 @@
--- conf/layout.lua — dwindle/master + binds + gestures (from conf/layouts/default.conf)
+-- conf/layout.lua — dwindle layout, workspace binds, and gestures
+-- https://wiki.hypr.land/Configuring/Layouts/Dwindle-Layout/
+-- preserve_split keeps splits on close; 3-finger horizontal swipe cycles workspaces
 
 hl.config({
   dwindle = {
-    preserve_split = true,
+    preserve_split = true, -- keep splits when windows close
   },
-  -- master is commented out in original — keep disabled
-  -- master = { new_status = "master" },
   binds = {
-    workspace_back_and_forth = true,
-    allow_workspace_cycles   = true,
-    pass_mouse_when_bound    = false,
+    workspace_back_and_forth = true,  -- SUPER+<n> toggles back to previous ws
+    allow_workspace_cycles   = true,  -- swipe cycles first ↔ last
+    pass_mouse_when_bound    = false, -- don't pass click through when binding mouse
   },
 })
 
-hl.gesture({ fingers = 3, direction = "horizontal", action = "workspace" })
+hl.gesture({ fingers = 3, direction = "horizontal", action = "workspace" }) -- 3-finger swipe → workspace

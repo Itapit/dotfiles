@@ -1,5 +1,6 @@
--- conf/decoration.lua — window decoration (from conf/decorations/default.conf + conf/custom.conf)
--- Name: "Rounding All Blur No Shadows" + waybar layerrule from custom.conf
+-- conf/decoration.lua — rounding, blur, shadow, and opacity
+-- https://wiki.hypr.land/Configuring/Basics/Variables/#decoration
+-- Blur xray + ignore_opacity keeps panels readable; shadow adds depth
 
 hl.config({
   decoration = {
@@ -22,6 +23,6 @@ hl.config({
   },
 })
 
--- Waybar blur (deduped: custom.conf had duplicate blur rule)
+-- Waybar layer — blur behind bar for transparency
 hl.layer_rule({ name = "waybar-blur",  match = { namespace = "^waybar$" }, blur = true })
 hl.layer_rule({ name = "waybar-alpha", match = { namespace = "^waybar$" }, ignore_alpha = 0.1 })

@@ -1,5 +1,6 @@
--- conf/input.lua — keyboard & input (from conf/keyboard.conf)
--- See https://wiki.hypr.land/Configuring/Variables/#input
+-- conf/input.lua — keyboard, mouse, and touchpad
+-- https://wiki.hypr.land/Configuring/Variables/#input
+-- kb_layout us,il + alt_shift_toggle switches between them
 
 hl.config({
   input = {

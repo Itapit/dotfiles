@@ -1,19 +1,16 @@
--- conf/apps.lua — centralized application definitions
--- Vendored from ~/.config/ml4w/settings/* (Phase 1 inventory 2026-08-30)
--- Original ML4W files: terminal.sh=kitty, browser.sh=zen-browser, filemanager.sh=nemo, editor.sh=gnome-text-editor
--- Per user request: terminal=kitty, browser=zen, filemanager=nautilus, editor=code
--- This module will be required by hyprland.lua and keybindings.lua after Lua migration.
--- Waybar/eww theming intentionally left out (dealt with later).
+-- conf/apps.lua — central app definitions
+-- Edit here to change your default apps; referenced by autostart.lua and keybindings.lua.
+-- https://wiki.hypr.land/Configuring/Basics/Autostart/ and Binds
 
 local apps = {
-  terminal    = "kitty",
-  browser     = "zen",          -- zen-browser package; binary `zen` (fallback: zen-browser)
-  filemanager = "nautilus",
-  editor      = "code",         -- vscode
+  terminal    = "kitty",                       -- terminal emulator
+  browser     = "zen",                         -- zen-browser, binary is `zen` (fallback: zen-browser)
+  filemanager = "nautilus",                    -- file manager (GNOME Files)
+  editor      = "code",                        -- VS Code (`code` binary)
 
   -- Launcher / menus
-  launcher    = "rofi -show drun -replace -i",
-  clipboard   = "~/.config/ml4w/scripts/cliphist.sh", -- TODO: vendor or replace with cliphist.sh inside dotfiles/bin
+  launcher    = "rofi -show drun -replace -i", -- app launcher (SUPER+A)
+  clipboard   = "~/.config/ml4w/scripts/cliphist.sh", -- TODO: vendor to dotfiles/bin/.local/bin or hypr/scripts/
 }
 
 return apps

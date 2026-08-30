@@ -1,7 +1,6 @@
--- conf/colors.lua — static palette (migrated from colors.conf 2026-08-30)
--- No autogeneration from wallpaper (per user request). Edit manually.
--- Values kept as "rgba(...)" strings matching hyprlang `rgba(rrggbbaa)`.
--- Original had $color8=$primary, $color11=$on_surface remaps — preserved as aliases.
+-- conf/colors.lua — static Material palette (edit manually, no wallpaper generation)
+-- Format is "rgba(rrggbbaa)" — same as hyprlang `rgba(...)`. See hyprpaper.conf for wallpaper.
+-- Aliases color8/color11 kept for general.lua border colors; foreground for hyprlock.
 
 local c = {
   background                 = "rgba(0f1417ff)",
@@ -56,11 +55,9 @@ local c = {
   tertiary_fixed_dim         = "rgba(c9c2eaff)",
 }
 
--- Legacy ML4W aliases (hyprland.conf:37-38)
-c.color8  = c.primary
-c.color11 = c.on_surface
-
--- Hyprlock/waybar sometimes expects $foreground — map to on_surface
-c.foreground = c.on_surface
+-- Aliases for border colors (general.lua) and hyprlock
+c.color8  = c.primary      -- active border fallback
+c.color11 = c.on_surface   -- historically $color11
+c.foreground = c.on_surface -- hyprlock label color
 
 return c

@@ -1,7 +1,6 @@
--- conf/general.lua — general window layout (from conf/windows/default.conf + conf/custom.conf)
--- Picked: border_size=2 with correct hierarchy (active=primary vibrant, inactive=muted).
--- Previously custom.conf had border_size=0 (cols were no-ops) and inverted
--- colors (active=$on_surface muted, inactive=$primary accent). Now fixed.
+-- conf/general.lua — gaps, borders, and layout
+-- https://wiki.hypr.land/Configuring/Basics/Variables/#general
+-- gaps_in/out: spacing, border_size + col.*_border: focused vs unfocused highlight
 
 local colors = require("conf.colors")
 

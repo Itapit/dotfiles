@@ -1,32 +1,29 @@
--- hyprland.lua — Hyprland 0.56 Lua config (migrated 2026-08-30)
--- Entry point. Modular requires mirror old hyprland.conf source tree, but collapsed.
--- Branch: hypr-lua-migration. Original hyprland.conf kept as hyprland.conf.bak.20260830.
--- See INVENTORY.md and conf/*.lua for per-module docs.
+-- hyprland.lua — Hyprland 0.56 Lua entry point
+-- https://wiki.hypr.land/Configuring/Start/
+-- Each module is a Lua file under conf/. Order matters: palette first, then
+-- hardware/input, look & feel, rules, autostart (after env), keybindings last.
 
--- Colors first (defines palette, no Hyprland calls)
+-- Palette — no Hyprland calls, just color table for other modules
 require("conf.colors")
 
--- Core hardware / input
-require("conf.monitors")
-require("conf.input")
-require("conf.cursor")
-require("conf.environment")
+-- Hardware & input
+require("conf.monitors")    -- https://wiki.hypr.land/Configuring/Basics/Monitors/
+require("conf.input")       -- https://wiki.hypr.land/Configuring/Variables/#input
+require("conf.cursor")      -- cursor theme/size
+require("conf.environment") -- env vars + xwayland
 
 -- Look & feel
-require("conf.general")
-require("conf.decoration")
-require("conf.layout")
-require("conf.misc")
-require("conf.animations")
+require("conf.general")     -- gaps, borders, layout
+require("conf.decoration")  -- rounding, blur, shadow + waybar layer rules
+require("conf.layout")      -- dwindle, binds, gestures
+require("conf.misc")        -- logo, splash, workspace tracking
+require("conf.animations")  -- https://wiki.hypr.land/Configuring/Advanced-and-Cool/Animations/
 
 -- Rules
-require("conf.windowrules")
+require("conf.windowrules") -- https://wiki.hypr.land/Configuring/Basics/Window-Rules/
 
--- Autostart (exec-once etc.) — must come after env
-require("conf.autostart")
+-- Autostart — must come after environment
+require("conf.autostart")   -- https://wiki.hypr.land/Configuring/Basics/Autostart/
 
--- Keybindings last (uses conf.apps)
-require("conf.keybindings")
-
--- Optional: load custom overrides if file exists
--- pcall(require, "conf.custom")
+-- Keybindings — uses conf/apps.lua
+require("conf.keybindings") -- https://wiki.hypr.land/Configuring/Basics/Binds/

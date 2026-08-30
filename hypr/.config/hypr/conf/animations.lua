@@ -1,9 +1,10 @@
--- conf/animations.lua — End-4 preset (from conf/animations/default.conf)
--- Beziers + animation directives.
+-- conf/animations.lua — End-4 bezier curves and workspace/window animations
+-- https://wiki.hypr.land/Configuring/Advanced-and-Cool/Animations/
+-- Tweaked md3 + menu curves for popin/slide — edit speed/bezier/style per leaf here.
 
 hl.config({ animations = { enabled = true } })
 
--- Curves
+-- Curves — named easings for animations below
 hl.curve("linear",         { type = "bezier", points = { {0, 0},       {1, 1}       } })
 hl.curve("md3_standard",   { type = "bezier", points = { {0.2, 0},     {0, 1}       } })
 hl.curve("md3_decel",      { type = "bezier", points = { {0.05, 0.7},  {0.1, 1}     } })
@@ -19,7 +20,7 @@ hl.curve("easeOutExpo",    { type = "bezier", points = { {0.16, 1},    {0.3, 1} 
 hl.curve("softAcDecel",    { type = "bezier", points = { {0.26, 0.26}, {0.15, 1}    } })
 hl.curve("md2",            { type = "bezier", points = { {0.4, 0},     {0.2, 1}     } })
 
--- Animations (speed, bezier, style)
+-- Per-leaf animations (speed = duration, style = popin/slide)
 hl.animation({ leaf = "windows",          enabled = true, speed = 3,  bezier = "md3_decel",  style = "popin 60%" })
 hl.animation({ leaf = "windowsIn",        enabled = true, speed = 3,  bezier = "md3_decel",  style = "popin 60%" })
 hl.animation({ leaf = "windowsOut",       enabled = true, speed = 3,  bezier = "md3_accel",  style = "popin 60%" })

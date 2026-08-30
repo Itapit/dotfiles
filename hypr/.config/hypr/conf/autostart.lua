@@ -16,8 +16,7 @@ hl.on("hyprland.start", function()
   hl.exec_cmd("hypridle")                                                   -- idle daemon (→ hyprlock)
   hl.exec_cmd("wl-paste --watch cliphist store")                            -- clipboard history
   hl.exec_cmd(home .. "/.config/hypr/scripts/gtk.sh")                       -- sync GTK theme/cursor from settings.ini
-  hl.exec_cmd(home .. "/.config/hypr/scripts/cleanup.sh")                   -- autostart cleanup
-  -- Wallpaper via hyprpaper.conf (static, see ~/wallpaper/SwissWallpaper.JPG)
+  hl.exec_cmd("hyprpaper")                                                   -- wallpaper daemon (reads hyprpaper.conf)
 
   -- Workspace apps (silent — open in background)
   hl.exec_cmd("[workspace 1 silent] " .. apps.editor)   -- ws 1

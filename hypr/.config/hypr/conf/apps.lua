@@ -10,7 +10,7 @@ local apps = {
 
   -- Launcher / menus
   launcher    = "rofi -show drun -replace -i", -- app launcher (SUPER+A)
-  clipboard   = "~/.config/ml4w/scripts/cliphist.sh", -- TODO: vendor to dotfiles/bin/.local/bin or hypr/scripts/
+  clipboard   = os.getenv("HOME") .. "/.local/bin/cliphist.sh", -- rofi UI for cliphist (bin/.local/bin/cliphist.sh)
 }
 
 return apps

@@ -37,7 +37,7 @@ hl.bind(mainMod .. " + SHIFT + PRINT", hl.dsp.exec_cmd(hyprscripts .. "/screensh
 hl.bind("PRINT", hl.dsp.exec_cmd("grimblast --notify copy area"))                  -- area screenshot
 hl.bind(mainMod .. " + SHIFT + L", hl.dsp.exec_cmd(os.getenv("HOME") .. "/.config/ml4w/scripts/wlogout.sh")) -- TODO: vendor wlogout.sh out of ml4w if you keep wlogout
 hl.bind(mainMod .. " + A", hl.dsp.exec_cmd("pkill rofi || rofi -show drun -replace -i")) -- rofi launcher
-hl.bind(mainMod .. " + SHIFT + V", hl.dsp.exec_cmd(hyprscripts .. "/../bin/cliphist.sh")) -- clipboard history
+hl.bind(mainMod .. " + SHIFT + V", hl.dsp.exec_cmd(apps.clipboard)) -- clipboard history (bin/.local/bin via apps.lua)
 
 -- Workspaces 1-10 (0 → 10)
 for i = 1, 10 do

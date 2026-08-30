@@ -22,8 +22,6 @@ hl.config({
   },
 })
 
--- Keep waybar/waybar blur rules
-hl.layer_rule({ name = "waybar-blur",     match = { namespace = "^waybar$" }, blur = true })
-hl.layer_rule({ name = "waybar-alpha",    match = { namespace = "^waybar$" }, ignore_alpha = 0.1 })
-hl.layer_rule({ name = "custom-waybar-blur", match = { namespace = "^waybar$" }, blur = true }) -- from custom.conf layerrule
--- Note: exact hl.layer_rule keys for ignore_alpha may be `ignore_alpha`; keep as in 0.56 stubs.
+-- Waybar blur (deduped: custom.conf had duplicate blur rule)
+hl.layer_rule({ name = "waybar-blur",  match = { namespace = "^waybar$" }, blur = true })
+hl.layer_rule({ name = "waybar-alpha", match = { namespace = "^waybar$" }, ignore_alpha = 0.1 })

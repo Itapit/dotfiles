@@ -10,11 +10,9 @@ hl.window_rule({ name = "blueman-float-title",  match = { title = "^blueman-mana
 hl.window_rule({ name = "nm-editor-float",      match = { title = "^nm-connection-editor$" }, float = true })
 hl.window_rule({ name = "qalculate-float",      match = { title = "^qalculate-gtk$" }, float = true })
 
-hl.window_rule({ name = "pip-float", match = { title = "^Picture-in-Picture$" }, float = true })
-hl.window_rule({ name = "pip-pin",   match = { title = "^Picture-in-Picture$" }, pin = true })
-hl.window_rule({ name = "pip-move",  match = { title = "^Picture-in-Picture$" }, move = "69.5% 4%" })
+hl.window_rule({ name = "pip", match = { title = "^Picture-in-Picture$" }, float = true, pin = true, move = "69.5% 4%" })
 
-hl.window_rule({ name = "idleinhibit-fullscreen", match = { class = "^.*$" }, idle_inhibit = "fullscreen" })
+hl.window_rule({ name = "idleinhibit-fullscreen", idle_inhibit = "fullscreen" })
 hl.window_rule({ name = "resolve-no-blur",       match = { class = "^resolve$", xwayland = true }, no_blur = true })
 
 -- ML4W-legacy but still useful (keep minimal)
@@ -35,6 +33,5 @@ hl.window_rule({ name = "hyprland-share-picker",  match = { class = "hyprland-sh
 
 hl.window_rule({ name = "dotfiles-floating", match = { class = "dotfiles-floating" }, float = true, size = "1000 700", center = true })
 
--- File pickers
-hl.window_rule({ name = "xdg-portal-open", match = { class = "^xdg-desktop-portal-gtk$", title = "^(Open.*Files?|Save.*Files?|All Files|Save)$" }, float = true })
-hl.window_rule({ name = "xdg-portal-center", match = { class = "^xdg-desktop-portal-gtk$", title = "^(Open.*Files?|Save.*Files?|All Files|Save)$" }, center = true })
+-- File pickers (merged: was two rules with identical match)
+hl.window_rule({ name = "xdg-portal", match = { class = "^xdg-desktop-portal-gtk$", title = "^(Open.*Files?|Save.*Files?|All Files|Save)$" }, float = true, center = true })

@@ -1,6 +1,10 @@
 -- conf/keybindings.lua — migrated from conf/keybindings/default.conf (2026-08-30)
--- SUPER is mainMod. Uses conf/apps.lua for terminal/browser/filemanager.
--- ML4W $SCRIPTS and commented sidepad/gamemode/waybar binds dropped. Typo $mainMode fixed.
+-- Uses conf/apps.lua for terminal/browser/filemanager. Case is intentional:
+-- Hyprland binds are case-sensitive (SUPER+T = SUPER+SHIFT+t). Original kept
+-- T/B/F uppercase for primary apps and v/d/s lowercase for secondary; preserved here.
+-- Dispatchers: native hl.dsp.* where available (window.kill/fullscreen, focus,
+-- window.move/drag/resize); cyclenext/reload have no typed dispatcher in 0.56
+-- stubs, so we fallback to hyprctl via exec_cmd (documented below).
 
 local apps = require("conf.apps")
 
@@ -23,12 +27,14 @@ hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd(hyprscripts .. "/toggle-monit
 -- Windows
 hl.bind(mainMod .. " + Q", hl.dsp.window.kill())
 hl.bind(mainMod .. " + SHIFT + F", hl.dsp.window.fullscreen({ mode = 0 }))
+-- cyclenext has no hl.dsp typed dispatcher in 0.56 stubs → shell fallback (cost: one hyprctl fork per Tab)
 hl.bind(mainMod .. " + Tab", hl.dsp.exec_cmd("hyprctl dispatch cyclenext"))
 
 hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(),   { mouse = true })
 hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
 -- Actions
+-- reload has no hl.dsp typed dispatcher in 0.56 → hyprctl fallback
 hl.bind(mainMod .. " + CTRL + R", hl.dsp.exec_cmd("hyprctl reload"))
 hl.bind(mainMod .. " + SHIFT + PRINT", hl.dsp.exec_cmd(hyprscripts .. "/screenshot.sh"))
 hl.bind("PRINT", hl.dsp.exec_cmd("grimblast --notify copy area"))
@@ -48,12 +54,12 @@ hl.bind("XF86MonBrightnessUp",   hl.dsp.exec_cmd("brightnessctl -q s +10%"))
 hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl -q s 10%-"))
 hl.bind("XF86AudioRaiseVolume",  hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 2%+"), { repeating = true })
 hl.bind("XF86AudioLowerVolume",  hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%-"),     { repeating = true })
-hl.bind("XF86AudioMute",         hl.dsp.exec_cmd("pactl set-sink-mute @DEFAULT_SINK@ toggle"))
+hl.bind("XF86AudioMute",         hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"))
 hl.bind("XF86AudioPlay",         hl.dsp.exec_cmd("playerctl play-pause"))
 hl.bind("XF86AudioPause",        hl.dsp.exec_cmd("playerctl pause"))
 hl.bind("XF86AudioNext",         hl.dsp.exec_cmd("playerctl next"))
 hl.bind("XF86AudioPrev",         hl.dsp.exec_cmd("playerctl previous"))
-hl.bind("XF86AudioMicMute",      hl.dsp.exec_cmd("pactl set-source-mute @DEFAULT_SOURCE@ toggle"))
+hl.bind("XF86AudioMicMute",      hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"))
 -- hl.bind("XF86Lock",              hl.dsp.exec_cmd("hyprlock")) -- disabled: Unknown keysym on 0.56, use loginctl or keep original hyprlang if needed
 
 hl.bind("code:238", hl.dsp.exec_cmd("brightnessctl -d smc::kbd_backlight s +10"))

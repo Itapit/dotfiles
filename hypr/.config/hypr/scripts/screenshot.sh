@@ -18,14 +18,12 @@
 prompt='Screenshot'
 mesg="DIR: ~/Screenshots"
 
-# Screenshot Filename
-source ~/.config/ml4w/settings/screenshot-filename.sh
-
-# Screenshot Folder
-source ~/.config/ml4w/settings/screenshot-folder.sh
-
-# Screenshot Editor
-export GRIMBLAST_EDITOR="$(cat ~/.config/ml4w/settings/screenshot-editor.sh)"
+# Screenshot config — central SSOT
+# shellcheck source=/dev/null
+source "$HOME/.config/hypr/conf/config.sh" 2>/dev/null || true
+NAME="screenshot_$(date +%d%m%Y_%H%M%S).jpg"
+screenshot_folder="${screenshot_folder:-$HOME/Pictures/Screenshots}"
+export GRIMBLAST_EDITOR="${screenshot_editor:-pinta}"
 
 # Example for keybindings
 # bind = SUPER, p, exec, grimblast save active

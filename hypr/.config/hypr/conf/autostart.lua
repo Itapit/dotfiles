@@ -3,8 +3,8 @@
 -- All commands run once on Hyprland start. dbus env is exported first so
 -- portals and bars inherit WAYLAND_DISPLAY/XDG_CURRENT_DESKTOP.
 
-local apps = require("conf.apps")
-local home = os.getenv("HOME")
+local cfg = require("conf.config")
+local home = os.getenv("HOME") -- separate local, not cfg.home per request
 
 hl.on("hyprland.start", function()
   -- System env for Wayland portals
@@ -19,9 +19,9 @@ hl.on("hyprland.start", function()
   hl.exec_cmd("hyprpaper")                                                   -- wallpaper daemon (reads hyprpaper.conf)
 
   -- Workspace apps (silent — open in background)
-  hl.exec_cmd("[workspace 1 silent] " .. apps.editor)   -- ws 1
-  hl.exec_cmd("[workspace 2 silent] " .. apps.browser)  -- ws 2
-  hl.exec_cmd("[workspace 4 silent] gitkraken")         -- ws 4
-  hl.exec_cmd("[workspace 5 silent] spotify")           -- ws 5
-  hl.exec_cmd("[workspace 3 silent] " .. apps.terminal) -- ws 3
+  hl.exec_cmd("[workspace 1 silent] " .. cfg.editor)   -- ws 1
+  hl.exec_cmd("[workspace 2 silent] " .. cfg.browser)  -- ws 2
+  hl.exec_cmd("[workspace 4 silent] gitkraken")        -- ws 4
+  hl.exec_cmd("[workspace 5 silent] spotify")          -- ws 5
+  hl.exec_cmd("[workspace 3 silent] " .. cfg.terminal) -- ws 3
 end)

@@ -4,15 +4,16 @@
 -- v/d/s are lowercase. Dispatchers use native hl.dsp.* where available;
 -- cyclenext/reload have no typed dispatcher in 0.56, fallback to hyprctl.
 
-local apps = require("conf.apps")
+local cfg = require("conf.config")
+local home = os.getenv("HOME") -- separate local, not cfg.home
 
 local mainMod = "SUPER"
-local hyprscripts = os.getenv("HOME") .. "/.config/hypr/scripts"
+local hyprscripts = cfg.hyprscripts
 
 -- Applications
-hl.bind(mainMod .. " + T", hl.dsp.exec_cmd(apps.terminal))
-hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(apps.browser))
-hl.bind(mainMod .. " + F", hl.dsp.exec_cmd(apps.filemanager))
+hl.bind(mainMod .. " + T", hl.dsp.exec_cmd(cfg.terminal))
+hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(cfg.browser))
+hl.bind(mainMod .. " + F", hl.dsp.exec_cmd(cfg.filemanager))
 hl.bind(mainMod .. " + v", hl.dsp.exec_cmd("code"))
 hl.bind(mainMod .. " + d", hl.dsp.exec_cmd("discord"))
 hl.bind(mainMod .. " + s", hl.dsp.exec_cmd("spotify"))
@@ -35,9 +36,9 @@ hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 hl.bind(mainMod .. " + CTRL + R", hl.dsp.exec_cmd("hyprctl reload"))               -- reload config (no typed dsp in 0.56)
 hl.bind(mainMod .. " + SHIFT + PRINT", hl.dsp.exec_cmd(hyprscripts .. "/screenshot.sh")) -- screenshot menu
 hl.bind("PRINT", hl.dsp.exec_cmd("grimblast --notify copy area"))                  -- area screenshot
-hl.bind(mainMod .. " + SHIFT + L", hl.dsp.exec_cmd(os.getenv("HOME") .. "/.config/ml4w/scripts/wlogout.sh")) -- TODO: vendor wlogout.sh out of ml4w if you keep wlogout
-hl.bind(mainMod .. " + A", hl.dsp.exec_cmd("pkill rofi || rofi -show drun -replace -i")) -- rofi launcher
-hl.bind(mainMod .. " + SHIFT + V", hl.dsp.exec_cmd(apps.clipboard)) -- clipboard history (bin/.local/bin via apps.lua)
+hl.bind(mainMod .. " + SHIFT + L", hl.dsp.exec_cmd(cfg.wlogout)) -- wlogout via config.sh SSOT (bin/.local/bin/wlogout-menu.sh)
+hl.bind(mainMod .. " + A", hl.dsp.exec_cmd(cfg.launcher)) -- rofi launcher via config.sh SSOT
+hl.bind(mainMod .. " + SHIFT + V", hl.dsp.exec_cmd(cfg.clipboard)) -- clipboard history via config.sh SSOT
 
 -- Workspaces 1-10 (0 → 10)
 for i = 1, 10 do

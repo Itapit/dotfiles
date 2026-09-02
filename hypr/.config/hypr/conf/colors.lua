@@ -1,5 +1,7 @@
 -- conf/colors.lua — static Material palette (edit manually, no wallpaper generation)
 -- Format is "rgba(rrggbbaa)" — same as hyprlang `rgba(...)`. See hyprpaper.conf for wallpaper.
+-- KEEP IN SYNC with ../colors.conf — edit both files when changing a color.
+-- colors.conf is hyprlock's hyprlang source (source = colors.conf); this file is Hyprland Lua's palette.
 -- Aliases color8/color11 kept for general.lua border colors; foreground for hyprlock.
 
 local c = {

@@ -58,10 +58,6 @@ if [[ $(_checkCommandExists "pacman") == 0 ]]; then
     check_lock_files
 
     updates=$(checkupdates-with-aur | wc -l)
-# Fedora
-elif [[ $(_checkCommandExists "dnf") == 0 ]]; then
-    updates=$(dnf check-update -q | grep -c ^[a-z0-9])
-# Others
 else
     updates=0
 fi
@@ -80,10 +76,8 @@ if [ "$updates" -gt $threshhold_red ]; then
     css_class="red"
 fi
 
-if [ "$updates" != 0 ]; then
-    if [ "$updates" -gt $threshhold_green ]; then
-        printf '{"text": "%s", "alt": "%s", "tooltip": "Click to update your system", "class": "%s"}' "$updates" "$updates" "$css_class"
-    else
-        printf '{"text": "0", "alt": "0", "tooltip": "No updates available", "class": "green"}'
-    fi
+if [ "$updates" -eq 0 ]; then
+    printf '{"text": "0", "alt": "0", "tooltip": "No updates available", "class": "green"}'
+else
+    printf '{"text": "%s", "alt": "%s", "tooltip": "Click to update your system", "class": "%s"}' "$updates" "$updates" "$css_class"
 fi

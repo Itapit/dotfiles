@@ -22,7 +22,7 @@ hl.bind(mainMod .. " + P", hl.dsp.exec_cmd("postman"))
 hl.bind(mainMod .. " + O", hl.dsp.exec_cmd("obsidian"))
 
 hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd(hyprscripts .. "/toggle-monitor.sh"))
-h1.bind(mainMod .. " + SHIFT + F", hl.dsp.exec_cmd(hyprscripts .. "/toggle-all-float.sh"))
+hl.bind(mainMod .. " CTRL + SHIFT + F", hl.dsp.exec_cmd(hyprscripts .. "/toggle-all-float.sh"))
   
 -- Windows
 hl.bind(mainMod .. " + Q", hl.dsp.window.kill())                           -- close focused window

@@ -52,7 +52,8 @@ config.aur_helper  = config.aur_helper  or "yay"
 config.wallpaper_name = config.wallpaper_name or "SwissWallpaper"
 config.wallpaper = config.wallpaper or (home .. "/wallpaper/" .. config.wallpaper_name .. ".JPG")
 config.blurred_wallpaper = config.blurred_wallpaper or (home .. "/wallpaper/" .. config.wallpaper_name .. ".blurred.png")
-config.rofi_font = config.rofi_font or "Fira Sans 11"
+config.font = config.font or "JetBrainsMono Nerd Font"
+config.rofi_font = config.rofi_font or config.font
 config.screenshot_folder  = config.screenshot_folder  or (home .. "/Pictures/Screenshots")
 config.screenshot_editor  = config.screenshot_editor  or "pinta"
 

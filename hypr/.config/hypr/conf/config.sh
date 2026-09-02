@@ -26,8 +26,9 @@ wallpaper_name=SwissWallpaper
 wallpaper="$HOME/wallpaper/$wallpaper_name.JPG"
 blurred_wallpaper="$HOME/wallpaper/$wallpaper_name.blurred.png"
 
-# Rofi
-rofi_font="Fira Sans 11"
+# Fonts — general SSOT, rofi_font derives from it
+font="JetBrainsMono Nerd Font"
+rofi_font="$font"
 
 # Screenshots (used by scripts/screenshot.sh)
 screenshot_folder="$HOME/Pictures/Screenshots"

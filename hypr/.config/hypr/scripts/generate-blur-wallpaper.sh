@@ -48,4 +48,3 @@ fi
 
 echo "Wallpaper: $wallpaper"
 echo "Blurred:   $blurred_wallpaper (blur $blur)"
-echo "Legacy RASI shim: $legacy_rasi"

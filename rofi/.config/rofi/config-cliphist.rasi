@@ -12,7 +12,6 @@
 /* ---- Configuration ---- */
 configuration {
     modi:                       "drun,filebrowser,window,run";
-    font:                       "Fira Sans 11";
     show-icons:                 true;
     icon-theme:                 "Tela-circle-dracula";
     display-drun:                " ";
@@ -28,20 +27,18 @@ configuration {
     
 }
 
-/* ---- Load font ---- */
-@import "~/.config/ml4w/settings/rofi-font.rasi"
+/* ---- Load font (SSOT: hypr/conf/config.sh) ---- */
+@import "font.rasi"
 
 /* ---- Load colors ---- */
 @theme "~/.config/rofi/colors.rasi"
 
-/* ---- Load wallpaper ---- */
+/* ---- SSOT: hypr/conf/config.sh (wallpaper_name, blurred_wallpaper) ---- */
 @import "~/.cache/ml4w/hyprland-dotfiles/current_wallpaper.rasi"
 
-/* ---- Load border width ---- */
-@import "~/.config/ml4w/settings/rofi-border.rasi"
-
-/* ---- Load border radius ---- */
-@import "~/.config/ml4w/settings/rofi-border-radius.rasi"
+/* ---- Static borders (was ml4w/settings/rofi-border*.rasi) ---- */
+* { border-width: 3px; }
+* { border-radius: 2em; }
 
 /* ---- Map colors ---- */
 * {

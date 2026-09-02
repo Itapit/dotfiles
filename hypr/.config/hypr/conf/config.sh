@@ -20,6 +20,15 @@ hyprscripts="$HOME/.config/hypr/scripts"
 # System
 aur_helper=yay
 
+# Wallpaper — change wallpaper_name to switch wallpaper, wallpaper/blurred_wallpaper derive from it
+# wallpaper_name is basename without extension (e.g., SwissWallpaper)
+wallpaper_name=SwissWallpaper
+wallpaper="$HOME/wallpaper/$wallpaper_name.JPG"
+blurred_wallpaper="$HOME/wallpaper/$wallpaper_name.blurred.png"
+
+# Rofi
+rofi_font="Fira Sans 11"
+
 # Screenshots (used by scripts/screenshot.sh)
 screenshot_folder="$HOME/Pictures/Screenshots"
 screenshot_editor=pinta

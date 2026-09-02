@@ -22,6 +22,18 @@ local function parse_config_sh(path)
     end
   end
   f:close()
+  -- second pass: expand $var / ${var} referencing other keys in the same file
+  -- (e.g., wallpaper="$HOME/wallpaper/$wallpaper_name.JPG")
+  for _ = 1, 2 do
+    for k, v in pairs(cfg) do
+      v = v:gsub("%$%{([%w_]+)%}", function(var) return cfg[var] or ("${" .. var .. "}") end)
+      v = v:gsub("%$([%w_]+)", function(var)
+        if var == "HOME" then return home end
+        return cfg[var] or ("$" .. var)
+      end)
+      cfg[k] = v
+    end
+  end
   return cfg
 end
 
@@ -37,6 +49,10 @@ config.clipboard   = config.clipboard   or (home .. "/.local/bin/cliphist.sh")
 config.wlogout     = config.wlogout     or (home .. "/.local/bin/wlogout-menu.sh")
 config.hyprscripts = config.hyprscripts or (home .. "/.config/hypr/scripts")
 config.aur_helper  = config.aur_helper  or "yay"
+config.wallpaper_name = config.wallpaper_name or "SwissWallpaper"
+config.wallpaper = config.wallpaper or (home .. "/wallpaper/" .. config.wallpaper_name .. ".JPG")
+config.blurred_wallpaper = config.blurred_wallpaper or (home .. "/wallpaper/" .. config.wallpaper_name .. ".blurred.png")
+config.rofi_font = config.rofi_font or "Fira Sans 11"
 config.screenshot_folder  = config.screenshot_folder  or (home .. "/Pictures/Screenshots")
 config.screenshot_editor  = config.screenshot_editor  or "pinta"
 

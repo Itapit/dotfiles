@@ -24,7 +24,7 @@ aur_helper=yay
 # wallpaper_name is basename without extension (e.g., SwissWallpaper)
 wallpaper_name=SwissWallpaper
 wallpaper="$HOME/wallpaper/$wallpaper_name.JPG"
-blurred_wallpaper="$HOME/wallpaper/$wallpaper_name.blurred.png"
+blurred_wallpaper="$HOME/wallpaper/blurred_wallpaper.png"
 
 # Fonts — general SSOT, rofi_font derives from it
 font="JetBrainsMono Nerd Font"

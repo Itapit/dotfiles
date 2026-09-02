@@ -31,7 +31,7 @@ configuration {
 @import "font.rasi"
 
 /* ---- Load colors ---- */
-@theme "colors.rasi"
+@import "colors.rasi"
 
 /* ---- SSOT: hypr/conf/config.sh (wallpaper_name -> blurred_wallpaper) ---- */
 @import "current_wallpaper.rasi"

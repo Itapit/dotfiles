@@ -1,2 +1,2 @@
 /* Generated from hypr/conf/config.sh — do not edit, run generate-rofi-wallpaper.sh */
-* { current-image: url("/home/itapit/wallpaper/SwissWallpaper.blurred.png", height); }
+* { current-image: url("../../wallpaper/blurred_wallpaper.png", height); }

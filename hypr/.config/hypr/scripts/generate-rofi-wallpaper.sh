@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
-# blur-wallpaper.sh — generate blurred wallpaper for rofi/wlogout
+# generate-rofi-wallpaper.sh — generate blurred wallpaper + rofi current_wallpaper.rasi
 # Manual run after changing wallpaper_name in conf/config.sh
-# Saves to $HOME/wallpaper/<name>.blurred.png (SSOT: conf/config.sh)
+# Blurred image: $HOME/wallpaper/<name>.blurred.png (SSOT: conf/config.sh)
+# Rasi shim: rofi/current_wallpaper.rasi next to font.rasi (SSOT: blurred_wallpaper)
 
 set -e
 
@@ -48,3 +49,11 @@ fi
 
 echo "Wallpaper: $wallpaper"
 echo "Blurred:   $blurred_wallpaper (blur $blur)"
+
+# Rofi configs @import "current_wallpaper.rasi" -> mainbox background-image: @current-image
+dotfiles_rasi="$HOME/dotfiles/rofi/.config/rofi/current_wallpaper.rasi"
+
+mkdir -p "$(dirname "$rasi")"
+printf '/* Generated from hypr/conf/config.sh — do not edit, run generate-rofi-wallpaper.sh */\n* { current-image: url("%s", height); }\n' "$blurred_wallpaper" > "$rasi"
+
+echo "Generated: $dotfiles_rasi"

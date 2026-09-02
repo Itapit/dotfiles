@@ -33,8 +33,8 @@ configuration {
 /* ---- Load colors ---- */
 @theme "~/.config/rofi/colors.rasi"
 
-/* ---- SSOT: hypr/conf/config.sh (wallpaper_name, blurred_wallpaper) ---- */
-@import "~/.cache/ml4w/hyprland-dotfiles/current_wallpaper.rasi"
+/* ---- SSOT: hypr/conf/config.sh (wallpaper_name -> blurred_wallpaper) ---- */
+@import "current_wallpaper.rasi"
 
 /* ---- Static borders (was ml4w/settings/rofi-border*.rasi) ---- */
 * { border-width: 3px; }

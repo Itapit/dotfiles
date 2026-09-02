@@ -30,6 +30,10 @@ blurred_wallpaper="$HOME/wallpaper/$wallpaper_name.blurred.png"
 font="JetBrainsMono Nerd Font"
 rofi_font="$font"
 
+# Rofi borders — SSOT for all rofi configs
+rofi_border_width="3px"
+rofi_border_radius="2em"
+
 # Screenshots (used by scripts/screenshot.sh)
 screenshot_folder="$HOME/Pictures/Screenshots"
 screenshot_editor=pinta

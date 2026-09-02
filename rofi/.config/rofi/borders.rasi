@@ -1,0 +1,3 @@
+/* Generated from hypr/conf/config.sh — do not edit, run generate-rofi-borders.sh */
+* { border-width: 3px; }
+* { border-radius: 2em; }

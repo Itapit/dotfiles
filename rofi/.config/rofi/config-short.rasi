@@ -36,9 +36,8 @@ configuration {
 /* ---- SSOT: hypr/conf/config.sh (wallpaper_name -> blurred_wallpaper) ---- */
 @import "current_wallpaper.rasi"
 
-/* ---- Static borders (was ml4w/settings/rofi-border*.rasi) ---- */
-* { border-width: 3px; }
-* { border-radius: 2em; }
+/* ---- SSOT: hypr/conf/config.sh -> rofi_border_width/rofi_border_radius ---- */
+@import "borders.rasi"
 
 /* ---- Map colors ---- */
 * {

@@ -54,6 +54,8 @@ config.wallpaper = config.wallpaper or (home .. "/wallpaper/" .. config.wallpape
 config.blurred_wallpaper = config.blurred_wallpaper or (home .. "/wallpaper/" .. config.wallpaper_name .. ".blurred.png")
 config.font = config.font or "JetBrainsMono Nerd Font"
 config.rofi_font = config.rofi_font or config.font
+config.rofi_border_width = config.rofi_border_width or "3px"
+config.rofi_border_radius = config.rofi_border_radius or "2em"
 config.screenshot_folder  = config.screenshot_folder  or (home .. "/Pictures/Screenshots")
 config.screenshot_editor  = config.screenshot_editor  or "pinta"
 

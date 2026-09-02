@@ -22,7 +22,8 @@ hl.bind(mainMod .. " + P", hl.dsp.exec_cmd("postman"))
 hl.bind(mainMod .. " + O", hl.dsp.exec_cmd("obsidian"))
 
 hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd(hyprscripts .. "/toggle-monitor.sh"))
-
+h1.bind(mainMod .. " + SHIFT + F", hl.dsp.exec_cmd(hyprscripts .. "/toggle-all-float.sh"))
+  
 -- Windows
 hl.bind(mainMod .. " + Q", hl.dsp.window.kill())                           -- close focused window
 hl.bind(mainMod .. " + SHIFT + F", hl.dsp.window.fullscreen({ mode = 0 })) -- fullscreen active window
@@ -62,7 +63,3 @@ hl.bind("XF86AudioMicMute",      hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_
 -- Keyboard backlight (Apple SMC)
 hl.bind("code:238", hl.dsp.exec_cmd("brightnessctl -d smc::kbd_backlight s +10"))
 hl.bind("code:237", hl.dsp.exec_cmd("brightnessctl -d smc::kbd_backlight s 10-"))
-
--- Optional: calculator / settings (uncomment if you use them)
--- hl.bind("XF86Calculator", hl.dsp.exec_cmd("qalculate-gtk"))
--- hl.bind("XF86Tools",      hl.dsp.exec_cmd("flatpak run com.ml4w.settings"))

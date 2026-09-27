@@ -2,6 +2,9 @@
 # set-wallpaper.sh — switch wallpaper (the only supported way)
 # Usage: set-wallpaper.sh <filename>   (basename in ~/wallpaper, or full path)
 #        set-wallpaper.sh              (print current wallpaper_file and exit)
+# Also wired as waypaper's post_command hook (config.ini passes "$wallpaper";
+# an optional $monitor 2nd arg is ignored). Re-selecting the current file
+# exits early with a note — no regen, no hyprctl calls.
 # Updates (all absolute expanded paths, no $HOME leftovers for hypr tools):
 #   hypr/conf/config.sh      -> wallpaper_file=<file>
 #   hypr/hyprpaper.conf      -> preload + wallpaper lines  (managed-by-script comment)
@@ -32,6 +35,9 @@ if [ $# -eq 0 ]; then
 fi
 
 # Accept basename or full path; always store the basename with extension.
+# A second $monitor arg from waypaper's post_command is accepted and ignored.
+# NOTE: waypaper passes a shell-escaped path — basenames with spaces need
+# unescaping first (none of the shipped wallpapers contain spaces).
 input="$1"
 file="$(basename "$input")"
 src="$WALL_DIR/$file"
@@ -41,6 +47,13 @@ if [ ! -f "$src" ]; then
   echo "ERROR: wallpaper not found: $src" >&2
   echo "Hint: pick a file from $WALL_DIR, or use default.jpg (shipped fallback)" >&2
   exit 1
+fi
+
+# Early-exit: already current (waypaper fires post_command on every select,
+# including re-selects and --restore) — skip the magick regen + hyprctl calls.
+if [ "${wallpaper_file:-}" = "$file" ]; then
+  echo "Already current: $file (nothing to do)"
+  exit 0
 fi
 
 abs_path="$WALL_DIR/$file"

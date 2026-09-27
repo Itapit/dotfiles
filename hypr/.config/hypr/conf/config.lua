@@ -23,7 +23,7 @@ local function parse_config_sh(path)
   end
   f:close()
   -- second pass: expand $var / ${var} referencing other keys in the same file
-  -- (e.g., wallpaper="$HOME/wallpaper/$wallpaper_name.JPG")
+  -- (e.g., wallpaper="$HOME/wallpaper/$wallpaper_file")
   for _ = 1, 2 do
     for k, v in pairs(cfg) do
       v = v:gsub("%$%{([%w_]+)%}", function(var) return cfg[var] or ("${" .. var .. "}") end)
@@ -49,8 +49,18 @@ config.clipboard   = config.clipboard   or (home .. "/.local/bin/cliphist.sh")
 config.wlogout     = config.wlogout     or (home .. "/.local/bin/wlogout-menu.sh")
 config.hyprscripts = config.hyprscripts or (home .. "/.config/hypr/scripts")
 config.aur_helper  = config.aur_helper  or "yay"
-config.wallpaper_name = config.wallpaper_name or "SwissWallpaper"
-config.wallpaper = config.wallpaper or (home .. "/wallpaper/" .. config.wallpaper_name .. ".JPG")
+config.wallpaper_file = config.wallpaper_file or "default.jpg"
+config.wallpaper = config.wallpaper or (home .. "/wallpaper/" .. config.wallpaper_file)
+-- fall back to default.jpg when the configured file is missing from ~/wallpaper
+local function _file_exists(p)
+  local f = io.open(p, "r")
+  if f then f:close() return true end
+  return false
+end
+if not _file_exists(config.wallpaper) then
+  config.wallpaper_file = "default.jpg"
+  config.wallpaper = home .. "/wallpaper/default.jpg"
+end
 config.blurred_wallpaper = config.blurred_wallpaper or (home .. "/wallpaper/blurred_wallpaper.png")
 config.font = config.font or "JetBrainsMono Nerd Font"
 config.rofi_font = config.rofi_font or config.font

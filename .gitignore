@@ -1,3 +1,5 @@
 opencode.json
 *.bak
 *.bak.*
+# Generated blur (regenerate with hypr/scripts/set-wallpaper.sh after stow)
+wallpaper/wallpaper/blurred_wallpaper.png

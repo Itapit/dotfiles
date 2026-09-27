@@ -33,7 +33,7 @@ configuration {
 /* ---- Load colors ---- */
 @import "colors.rasi"
 
-/* ---- SSOT: hypr/conf/config.sh (wallpaper_name -> blurred_wallpaper) ---- */
+/* ---- SSOT: hypr/conf/config.sh (wallpaper_file -> blurred_wallpaper) ---- */
 @import "current_wallpaper.rasi"
 
 /* ---- SSOT: hypr/conf/config.sh -> rofi_border_width/rofi_border_radius ---- */

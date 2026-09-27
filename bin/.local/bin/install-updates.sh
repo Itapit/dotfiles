@@ -17,26 +17,6 @@ _checkCommandExists() {
     return
 }
 
-_isInstalled() {
-    package="$1"
-    case $install_platform in
-        arch)
-            check="$($aur_helper -Qs --color always "${package}" | grep "local" | grep "${package} ")"
-            ;;
-        fedora)
-            check="$(dnf repoquery --quiet --installed ""${package}*"")"
-            ;;
-        *) ;;
-    esac
-
-    if [ -n "${check}" ]; then
-        echo 0 #'0' means 'true' in Bash
-        return #true
-    fi
-    echo 1 #'1' means 'false' in Bash
-    return #false
-}
-
 # ------------------------------------------------------
 # Confirm Start
 # ------------------------------------------------------
@@ -61,16 +41,14 @@ fi
 # Install update
 # ----------------------------------------------------- 
 
-# Arch
+# Arch only
 if [[ $(_checkCommandExists "pacman") == 0 ]]; then
-    aur_helper="$(cat ~/.config/ml4w/settings/aur.sh)"
-    $aur_helper
-
-# Fedora
-elif [[ $(_checkCommandExists "dnf") == 0 ]]; then
-    sudo dnf upgrade
+    # shellcheck source=/dev/null
+    source "$HOME/.config/hypr/conf/config.sh" 2>/dev/null || true
+    aur_helper="${aur_helper:-yay}"
+    "$aur_helper" -Syu
 else
-    echo ":: ERROR - Platform not supported"
+    echo ":: ERROR - Platform not supported (Arch only)"
     echo "Press [ENTER] to close."
     read
 fi

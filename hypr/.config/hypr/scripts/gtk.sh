@@ -18,7 +18,9 @@ cursor_theme="$(grep 'gtk-cursor-theme-name' "$config" | sed 's/.*\s*=\s*//')"
 cursor_size="$(grep 'gtk-cursor-theme-size' "$config" | sed 's/.*\s*=\s*//')"
 font_name="$(grep 'gtk-font-name' "$config" | sed 's/.*\s*=\s*//')"
 prefer_dark_theme="$(grep 'gtk-application-prefer-dark-theme' "$config" | sed 's/.*\s*=\s*//')"
-terminal=$(cat $HOME/.config/ml4w/settings/terminal.sh)
+# central config SSOT — source hypr config.sh for terminal
+# shellcheck source=/dev/null
+source "$HOME/.config/hypr/conf/config.sh" 2>/dev/null || terminal=kitty
 
 # Echo value for debugging
 echo "GTK-Theme:" $gtk_theme
@@ -41,11 +43,8 @@ gsettings set "$gnome_schema" cursor-theme "$cursor_theme"
 gsettings set "$gnome_schema" font-name "$font_name"
 gsettings set "$gnome_schema" color-scheme "$prefer_dark_theme_value"
 
-# Update cursor for Hyprland
-if [ -f ~/.config/hypr/conf/cursor.conf ]; then
-    echo "exec-once = hyprctl setcursor $cursor_theme $cursor_size" >~/.config/hypr/conf/cursor.conf
-    hyprctl setcursor $cursor_theme $cursor_size
-fi
+# Update cursor for Hyprland (cursor.lua handles autostart; just apply now)
+hyprctl setcursor "$cursor_theme" "$cursor_size" 2>/dev/null || true
 
 # Update gsettings for open any terminal
 gsettings set com.github.stunkymonkey.nautilus-open-any-terminal terminal "$terminal"

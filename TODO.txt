@@ -1,6 +1,0 @@
-check if i use nm-applet.sh
-
-check about snapshot thing before updates
-
-
-writes readme for each app maybe a how to wiki like aliases need to be written in fish

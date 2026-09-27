@@ -1,2 +1,3 @@
 opencode.json
-hypr/.config/hypr.bak.20260830
+*.bak
+*.bak.*

@@ -4,3 +4,5 @@ opencode.json
 # Generated blur (regenerate with hypr/scripts/generate-rofi-wallpaper.sh,
 # or set-wallpaper.sh <current file>, which regenerates it when missing)
 wallpaper/wallpaper/blurred_wallpaper.png
+# Written by file managers (nemo/nautilus sidebar) — personal paths, copied at cutover
+gtk/.config/gtk-3.0/bookmarks

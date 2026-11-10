@@ -7,7 +7,7 @@
 # exits early with a note — no regen, no hyprctl calls.
 # Updates (all absolute expanded paths, no $HOME leftovers for hypr tools):
 #   hypr/conf/config.sh      -> wallpaper_file=<file>
-#   hypr/hyprpaper.conf      -> preload + wallpaper lines  (managed-by-script comment)
+#   hypr/hyprpaper.conf      -> wallpaper { } block        (managed-by-script comment)
 #   hypr/hyprlock.conf       -> $wallpaper = ...           (managed-by-script comment)
 #   waypaper/config.ini      -> wallpaper = ...            (managed-by-script comment)
 # Then regenerates blurred png + rofi rasi via generate-rofi-wallpaper.sh
@@ -72,11 +72,17 @@ else
   printf '\nwallpaper_file=%s\n' "$file" >> "$CONF_SH"
 fi
 
-# 2. hyprpaper.conf — hyprpaper needs absolute paths; header marks script ownership
+# 2. hyprpaper.conf — hyprpaper needs absolute paths; header marks script ownership.
+# hyprpaper >= 0.8.5 ignores the old `preload =` / `wallpaper = ,path` lines
+# ("Monitor X has no target: no wp will be created"); it needs a wallpaper
+# block. An empty `monitor =` applies to every monitor.
 {
-  echo "# Managed by set-wallpaper.sh — do not edit preload/wallpaper manually"
-  echo "preload = $abs_path"
-  echo "wallpaper = ,$abs_path"
+  echo "# Managed by set-wallpaper.sh — do not edit the wallpaper block manually"
+  echo "wallpaper {"
+  echo "    monitor ="
+  echo "    path = $abs_path"
+  echo "    fit_mode = cover"
+  echo "}"
   echo "splash = false"
 } > "$HYPRPAPER"
 

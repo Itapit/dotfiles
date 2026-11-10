@@ -46,7 +46,3 @@ gsettings set "$gnome_schema" color-scheme "$prefer_dark_theme_value"
 # Update cursor for Hyprland (cursor.lua handles autostart; just apply now)
 hyprctl setcursor "$cursor_theme" "$cursor_size" 2>/dev/null || true
 
-# Update gsettings for open any terminal
-gsettings set com.github.stunkymonkey.nautilus-open-any-terminal terminal "$terminal"
-gsettings set com.github.stunkymonkey.nautilus-open-any-terminal use-generic-terminal-name "true"
-gsettings set com.github.stunkymonkey.nautilus-open-any-terminal keybindings "<Ctrl><Alt>t"

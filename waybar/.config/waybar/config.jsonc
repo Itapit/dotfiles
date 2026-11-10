@@ -1,36 +1,25 @@
-// __        __          _                 
-// \ \      / /_ _ _   _| |__   __ _ _ __  
-//  \ \ /\ / / _` | | | | '_ \ / _` | '__| 
-//   \ V  V / (_| | |_| | |_) | (_| | |    
-//    \_/\_/ \__,_|\__, |_.__/ \__,_|_|    
-//                 |___/                   
-//  
-// by Stephan Raabe (2023) 
-// ----------------------------------------------------- 
-//
+// waybar/config.jsonc — status bar layout (waybar's default config path)
+// Modules are defined in modules.json; styling in style.css (+ colors.css).
+// Reload after edits: ~/.config/waybar/launch.sh
 {
     // General Settings
     "layer": "top",
     "margin-top": 0,
     "margin-bottom": 0,
     "margin-left": 0,
-    "margin-right": 0,    
+    "margin-right": 0,
     "spacing": 0,
 
     // Load Modules
     "include": [
-        "~/.config/ml4w/settings/waybar-quicklinks.json",
         "~/.config/waybar/modules.json"
     ],
 
     // Modules Left
     "modules-left": [
-        //"custom/appmenu",
-        //"group/links",
         //"wlr/taskbar",
-        //"group/quicklinks",
         //"hyprland/window",
-	"clock",
+        "clock",
         "custom/empty"
     ],
 
@@ -39,20 +28,22 @@
         "hyprland/workspaces"
     ],
 
-    // Modules Right    
+    // Modules Right
+    // Also available in modules.json: backlight, power-profiles-daemon,
+    // group/hardware (disk/cpu/memory/language), group/tools (cliphist,
+    // hypridle toggle), tray, keyboard-state, user
     "modules-right": [
         "custom/updates",
         "pulseaudio",
         //"backlight",
         "bluetooth",
         "network",
-        "battery", 
+        "battery",
         //"power-profiles-daemon",
         //"group/hardware",
         //"group/tools",
         //"tray",
         "custom/notification",
         "custom/exit"
-        //"custom/ml4w-welcome"
     ]
 }

@@ -14,9 +14,9 @@ launcher="rofi -show drun -replace -i"
 clipboard="$HOME/.local/bin/cliphist.sh"
 wlogout="$HOME/.local/bin/wlogout-menu.sh"
 
-# Status bar — launched directly (waybar/launch.sh still depends on ml4w).
-# Points at the theme in use: themes/ml4w/config + themes/ml4w/white/style.css
-bar="waybar -c $HOME/.config/waybar/themes/ml4w/config -s $HOME/.config/waybar/themes/ml4w/white/style.css"
+# Status bar — waybar/launch.sh honours the toggle.sh hidden state;
+# waybar itself reads ~/.config/waybar/config.jsonc + style.css
+bar="$HOME/.config/waybar/launch.sh"
 
 # Paths
 hyprscripts="$HOME/.config/hypr/scripts"

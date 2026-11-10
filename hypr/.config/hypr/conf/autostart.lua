@@ -12,6 +12,7 @@ hl.on("hyprland.start", function()
 
   -- Core daemons
   hl.exec_cmd("/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1") -- auth agent for sudo/polkit
+  hl.exec_cmd(cfg.bar)                                                      -- status bar (config.sh SSOT)
   hl.exec_cmd("swaync")                                                     -- notification center
   hl.exec_cmd("hypridle")                                                   -- idle daemon (→ hyprlock)
   hl.exec_cmd("wl-paste --watch cliphist store")                            -- clipboard history

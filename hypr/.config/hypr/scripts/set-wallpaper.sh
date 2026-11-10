@@ -51,8 +51,15 @@ fi
 
 # Early-exit: already current (waypaper fires post_command on every select,
 # including re-selects and --restore) — skip the magick regen + hyprctl calls.
+# Exception: the blurred png is gitignored, so on a fresh clone it is missing
+# even though wallpaper_file is already current — generate it then.
 if [ "${wallpaper_file:-}" = "$file" ]; then
-  echo "Already current: $file (nothing to do)"
+  if [ ! -f "${blurred_wallpaper:-$WALL_DIR/blurred_wallpaper.png}" ]; then
+    echo "Already current: $file, but blurred wallpaper is missing — generating"
+    bash "$GENERATOR"
+  else
+    echo "Already current: $file (nothing to do)"
+  fi
   exit 0
 fi
 
@@ -96,11 +103,13 @@ done
 # 5. Blurred png + rofi rasi (reads the just-updated SSOT)
 bash "$GENERATOR"
 
-# 6. Apply live (no reload needed)
+# 6. Apply live (no reload needed). hyprpaper >= 0.8 loads on demand: the
+# old `preload` / `unload` IPC requests were removed and now exit non-zero,
+# which aborted this script under `set -e`. Only `wallpaper` is needed.
+# Non-fatal: config files are already updated, hyprpaper may not be running.
 if command -v hyprctl >/dev/null 2>&1; then
-  hyprctl hyprpaper preload "$abs_path"
-  hyprctl hyprpaper wallpaper ",$abs_path"
-  hyprctl hyprpaper unload unused
+  hyprctl hyprpaper wallpaper ",$abs_path" || \
+    echo "WARNING: could not apply live (is hyprpaper running?) — applies on next start" >&2
 fi
 
 echo "Wallpaper switched to: $file"

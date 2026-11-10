@@ -1,5 +1,6 @@
 opencode.json
 *.bak
 *.bak.*
-# Generated blur (regenerate with hypr/scripts/set-wallpaper.sh after stow)
+# Generated blur (regenerate with hypr/scripts/generate-rofi-wallpaper.sh,
+# or set-wallpaper.sh <current file>, which regenerates it when missing)
 wallpaper/wallpaper/blurred_wallpaper.png

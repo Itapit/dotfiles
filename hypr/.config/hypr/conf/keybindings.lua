@@ -22,7 +22,25 @@ hl.bind(mainMod .. " + P", hl.dsp.exec_cmd("postman"))
 hl.bind(mainMod .. " + O", hl.dsp.exec_cmd("obsidian"))
 
 hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd(hyprscripts .. "/toggle-monitor.sh"))
-hl.bind(mainMod .. " + CTRL + SHIFT + F", hl.dsp.exec_cmd(hyprscripts .. "/toggle-all-float.sh"))
+-- Toggle every window on the active workspace between floating and tiled.
+-- Replaces scripts/toggle-all-float.sh: the `workspaceopt allfloat` dispatcher
+-- it used is deprecated. If any window is tiled, float them all; otherwise
+-- tile them all (only windows not already in the target state are toggled).
+hl.bind(mainMod .. " + CTRL + SHIFT + F", function()
+  local ws = hl.get_active_workspace()
+  if not ws then return end
+  local windows = hl.get_workspace_windows(ws)
+  local target = false
+  for _, w in ipairs(windows) do
+    if not w.floating then target = true break end
+  end
+  for _, w in ipairs(windows) do
+    if w.floating ~= target then
+      hl.dispatch(hl.dsp.window.float({ action = "toggle", window = w }))
+    end
+  end
+  hl.exec_cmd("notify-send 'Workspace " .. ws.id .. "' 'Windows " .. (target and "floating" or "tiled") .. "'")
+end)
   
 -- Windows
 hl.bind(mainMod .. " + Q", hl.dsp.window.kill())                           -- close focused window

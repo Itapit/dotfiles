@@ -87,6 +87,20 @@ Log back in (start Hyprland as usual) when it reports `config ok`.
 Unstows every package and moves each backed-up path back where it was.
 If the final `stow` of an install fails, the script rolls back automatically.
 
+> **Hyprland ≥ 0.57 no longer reads `hyprland.conf` (hyprlang).** Restoring an old
+> hyprlang config (e.g. the ML4W one) only gives a working session on ≤ 0.56. To fully go
+> back, also downgrade from the pacman cache (versions this machine ran before 0.57):
+>
+> ```sh
+> cd /var/cache/pacman/pkg && sudo pacman -U \
+>   hyprland-0.56.2-1-x86_64.pkg.tar.zst aquamarine-0.14.0-2-x86_64.pkg.tar.zst \
+>   hyprutils-0.14.1-1-x86_64.pkg.tar.zst hyprgraphics-0.5.1-4-x86_64.pkg.tar.zst \
+>   hyprcursor-0.1.13-7-x86_64.pkg.tar.zst hyprtoolkit-0.5.4-4-x86_64.pkg.tar.zst \
+>   hyprland-guiutils-0.2.2-2-x86_64.pkg.tar.zst
+> ```
+>
+> and add `hyprland` to `IgnorePkg` in `/etc/pacman.conf` until you're ready to move forward again.
+
 ## How it fits together
 
 - **`hypr/.config/hypr/conf/config.sh` is the single source of truth** for apps (terminal, browser,

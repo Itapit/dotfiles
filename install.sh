@@ -206,6 +206,17 @@ cmd_rollback() {
     echo "   restored: ~/$rel"
   done
   info "Rollback done."
+  # Hyprland >= 0.57 dropped hyprlang: a restored hyprland.conf (e.g. ML4W)
+  # won't load unless Hyprland is downgraded too (see README "Rollback").
+  if [ -e "$TARGET/.config/hypr/hyprland.conf" ] && [ ! -e "$TARGET/.config/hypr/hyprland.lua" ] &&
+     command -v Hyprland >/dev/null; then
+    local ver
+    ver="$(Hyprland --version 2>/dev/null | sed -n 's/^Hyprland \([0-9.]*\).*/\1/p' | head -1)"
+    if [ -n "$ver" ] && [ "$(printf '%s\n0.57\n' "$ver" | sort -V | head -1)" = "0.57" ]; then
+      echo "WARNING: restored config is hyprland.conf, but Hyprland $ver can't read it" >&2
+      echo "         (hyprlang support ended in 0.57). Downgrade first — see README 'Rollback'." >&2
+    fi
+  fi
 }
 
 case "${1:-}" in

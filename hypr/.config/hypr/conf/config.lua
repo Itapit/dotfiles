@@ -1,6 +1,6 @@
 -- conf/config.lua — central settings (parses conf/config.sh as SSOT)
 -- SSOT is conf/config.sh — edit there. This parser keeps shell and Lua in sync.
--- https://wiki.hypr.land/Configuring/Basics/Autostart/ and Binds
+-- https://wiki.hypr.land/configuring/core/autostart/ and Binds
 
 local home = os.getenv("HOME") -- separate local, not part of returned table
 

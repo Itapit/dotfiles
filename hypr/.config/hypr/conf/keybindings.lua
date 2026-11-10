@@ -39,7 +39,9 @@ hl.bind(mainMod .. " + CTRL + SHIFT + F", function()
       hl.dispatch(hl.dsp.window.float({ action = "toggle", window = w }))
     end
   end
-  hl.exec_cmd("notify-send 'Workspace " .. ws.id .. "' 'Windows " .. (target and "floating" or "tiled") .. "'")
+  -- 0.57: HL.Workspace.id is integer|nil — don't concatenate a nil
+  local label = ws.id and ("Workspace " .. ws.id) or "Workspace"
+  hl.exec_cmd("notify-send '" .. label .. "' 'Windows " .. (target and "floating" or "tiled") .. "'")
 end)
   
 -- Windows

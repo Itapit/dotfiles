@@ -1,5 +1,5 @@
 -- conf/general.lua — gaps, borders, and layout
--- https://wiki.hypr.land/Configuring/Basics/Variables/#general
+-- https://wiki.hypr.land/configuring/core/config-options/#general
 -- gaps_in/out: spacing, border_size + col.*_border: focused vs unfocused highlight
 
 local colors = require("conf.colors")

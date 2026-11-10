@@ -1,5 +1,5 @@
 -- conf/environment.lua — Wayland session + toolkit env vars and xwayland
--- https://wiki.hypr.land/Configuring/Advanced-and-Cool/Environment-variables/
+-- https://wiki.hypr.land/configuring/core/environment-variables/
 -- XDG/QT/GDK set the Wayland backend; MOZ/OZONE force Electron/Firefox native Wayland.
 
 hl.env("XDG_CURRENT_DESKTOP", "Hyprland")

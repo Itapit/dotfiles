@@ -1,5 +1,5 @@
 -- conf/autostart.lua — autostart daemons and workspace apps
--- https://wiki.hypr.land/Configuring/Basics/Autostart/
+-- https://wiki.hypr.land/configuring/core/autostart/
 -- All commands run once on Hyprland start. dbus env is exported first so
 -- portals and bars inherit WAYLAND_DISPLAY/XDG_CURRENT_DESKTOP.
 

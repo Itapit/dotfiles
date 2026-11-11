@@ -305,12 +305,23 @@
 
   // Bluetooth
   "bluetooth": {
-    "format": " {status}",
-    "format-disabled": "",
-    "format-off": "",
-    "interval": 30,
-    "on-click": "sleep 0.1 && blueman-manager",
-    "format-no-controller": ""
+    // Always visible: On / Off, or the connected device's name.
+    // Icons: Nerd Font Material bluetooth / bluetooth-off / bluetooth-connect.
+    "format": "󰂯 {status}",
+    "format-on": "󰂯 On",
+    "format-off": "󰂲 Off",
+    "format-disabled": "󰂲 Off",
+    "format-connected": "󰂱 {device_alias}",
+    "format-connected-battery": "󰂱 {device_alias} {device_battery_percentage}%",
+    "format-no-controller": "",
+    "max-length": 24,
+    "tooltip-format": "{controller_alias}\t{controller_address}",
+    "tooltip-format-off": "Bluetooth off",
+    "tooltip-format-disabled": "Bluetooth blocked (rfkill)",
+    "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n{device_enumerate}",
+    "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+    "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_battery_percentage}%",
+    "on-click": "sleep 0.1 && blueman-manager"
   },
 
   // Other

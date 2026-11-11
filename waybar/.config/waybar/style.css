@@ -378,10 +378,9 @@ window#waybar.empty #window {
     opacity:0.8;
 }
 
-#bluetooth.off {
-    background-color: transparent;
-    padding: 0px;
-    margin: 0px;
+/* Off / rfkill-blocked: keep the pill visible but dimmed */
+#bluetooth.off, #bluetooth.disabled {
+    opacity: 0.5;
 }
 
 /* -----------------------------------------------------

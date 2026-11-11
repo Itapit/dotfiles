@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
-# generate-rofi-wallpaper.sh — generate blurred wallpaper + rofi current_wallpaper.rasi
+# generate-rofi-wallpaper.sh — generate blurred + square wallpaper + rofi current_wallpaper.rasi
 # Usually called by set-wallpaper.sh; manual run also works (reads conf/config.sh SSOT).
-# Blurred image: $HOME/wallpaper/blurred_wallpaper.png (single file, SSOT: conf/config.sh)
+# Blurred image: $HOME/wallpaper/blurred_wallpaper.png (rofi, wlogout, hyprlock background)
+# Square image:  $HOME/wallpaper/square_wallpaper.png  (hyprlock thumbnail; centered 1:1 crop)
 # Rasi shim: rofi/current_wallpaper.rasi next to font.rasi (SSOT: blurred_wallpaper)
 
 set -e
@@ -14,6 +15,7 @@ source "$HOME/.config/hypr/conf/config.sh" 2>/dev/null || true
 wallpaper_file="${wallpaper_file:-default.jpg}"
 wallpaper="${wallpaper:-$HOME/wallpaper/$wallpaper_file}"
 blurred_wallpaper="${blurred_wallpaper:-$HOME/wallpaper/blurred_wallpaper.png}"
+square_wallpaper="${square_wallpaper:-$HOME/wallpaper/square_wallpaper.png}"
 
 # Fall back to default.jpg when the configured file is missing
 if [ ! -f "$wallpaper" ]; then
@@ -34,17 +36,22 @@ blur="50x30"
 
 # Prefer magick (ImageMagick 7), fall back to convert (IM6)
 if command -v magick >/dev/null 2>&1; then
-  magick "$wallpaper" -blur "$blur" "$blurred_wallpaper"
+  im=magick
 elif command -v convert >/dev/null 2>&1; then
-  convert "$wallpaper" -blur "$blur" "$blurred_wallpaper"
+  im=convert
 else
   echo "ERROR: neither magick nor convert found (install imagemagick)" >&2
   exit 1
 fi
+"$im" "$wallpaper" -blur "$blur" "$blurred_wallpaper"
+# Same crop ML4W used (-gravity Center -extent 1:1); downscaled because the
+# hyprlock widget is 280px and a full-size square PNG is ~9MB.
+"$im" "$wallpaper" -gravity Center -extent 1:1 -resize '1024x1024>' "$square_wallpaper"
 
 
 echo "Wallpaper: $wallpaper"
 echo "Blurred:   $blurred_wallpaper (blur $blur)"
+echo "Square:    $square_wallpaper"
 
 # Rofi configs @import "current_wallpaper.rasi" -> mainbox background-image: @current-image
 # Use relative path ../../wallpaper/blurred_wallpaper.png

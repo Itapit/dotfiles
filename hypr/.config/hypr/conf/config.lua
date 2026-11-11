@@ -63,6 +63,7 @@ if not _file_exists(config.wallpaper) then
   config.wallpaper = home .. "/wallpaper/default.jpg"
 end
 config.blurred_wallpaper = config.blurred_wallpaper or (home .. "/wallpaper/blurred_wallpaper.png")
+config.square_wallpaper  = config.square_wallpaper  or (home .. "/wallpaper/square_wallpaper.png")
 config.font = config.font or "JetBrainsMono Nerd Font"
 config.rofi_font = config.rofi_font or config.font
 config.rofi_border_width = config.rofi_border_width or "3px"

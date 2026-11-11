@@ -54,8 +54,9 @@ fi
 # Exception: the blurred png is gitignored, so on a fresh clone it is missing
 # even though wallpaper_file is already current — generate it then.
 if [ "${wallpaper_file:-}" = "$file" ]; then
-  if [ ! -f "${blurred_wallpaper:-$WALL_DIR/blurred_wallpaper.png}" ]; then
-    echo "Already current: $file, but blurred wallpaper is missing — generating"
+  if [ ! -f "${blurred_wallpaper:-$WALL_DIR/blurred_wallpaper.png}" ] ||
+     [ ! -f "${square_wallpaper:-$WALL_DIR/square_wallpaper.png}" ]; then
+    echo "Already current: $file, but generated wallpapers are missing — generating"
     bash "$GENERATOR"
   else
     echo "Already current: $file (nothing to do)"

@@ -31,6 +31,8 @@ aur_helper=yay
 wallpaper_file=SwissWallpaper.JPG
 wallpaper="$HOME/wallpaper/$wallpaper_file"
 blurred_wallpaper="$HOME/wallpaper/blurred_wallpaper.png"
+# Square center crop for hyprlock's round thumbnail (generated, like the blur)
+square_wallpaper="$HOME/wallpaper/square_wallpaper.png"
 
 # Fonts — general SSOT, rofi_font derives from it
 font="JetBrainsMono Nerd Font"

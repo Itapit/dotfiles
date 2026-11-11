@@ -192,8 +192,8 @@ cmd_install() {
   fi
 
   # Blurred wallpaper is gitignored: make sure it exists for rofi/wlogout.
-  if [ ! -e "$TARGET/wallpaper/blurred_wallpaper.png" ]; then
-    info "Generating blurred wallpaper"
+  if [ ! -e "$TARGET/wallpaper/blurred_wallpaper.png" ] || [ ! -e "$TARGET/wallpaper/square_wallpaper.png" ]; then
+    info "Generating blurred + square wallpaper"
     bash "$TARGET/.config/hypr/scripts/generate-rofi-wallpaper.sh" || echo "WARNING: blur generation failed" >&2
   fi
 

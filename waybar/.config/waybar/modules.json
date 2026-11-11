@@ -254,13 +254,19 @@
       "warning": 30,
       "critical": 15
     },
+    // Click toggles format <-> format-alt (time to empty / time to full).
+    // No "format-charging"/"format-plugged": a per-status format overrides the
+    // toggled one, which made the click do nothing while charging. The
+    // charging/plugged look comes from per-status icons instead.
     "format": "{icon} {capacity}%",
-    "format-charging": "  {capacity}%",
-    "format-plugged": "  {capacity}%",
     "format-alt": "{icon}  {time}",
     // "format-good": "", // An empty format will hide the module
     // "format-full": "",
-    "format-icons": [" ", " ", " ", " ", " "]
+    "format-icons": {
+      "charging": [" "],
+      "plugged": [" "],
+      "default": [" ", " ", " ", " ", " "]
+    }
   },
 
   // Power Profiles Daemon

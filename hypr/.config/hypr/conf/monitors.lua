@@ -1,5 +1,5 @@
 -- conf/monitors.lua — monitor layout
--- https://wiki.hypr.land/Configuring/Basics/Monitors/
+-- https://wiki.hypr.land/configuring/core/monitors/
 -- Edit output/mode/position/scale for your setup. nwg-displays writes to this file format.
 
 hl.monitor({

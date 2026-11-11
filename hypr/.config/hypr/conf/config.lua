@@ -1,6 +1,6 @@
 -- conf/config.lua — central settings (parses conf/config.sh as SSOT)
 -- SSOT is conf/config.sh — edit there. This parser keeps shell and Lua in sync.
--- https://wiki.hypr.land/Configuring/Basics/Autostart/ and Binds
+-- https://wiki.hypr.land/configuring/core/autostart/ and Binds
 
 local home = os.getenv("HOME") -- separate local, not part of returned table
 
@@ -41,12 +41,13 @@ local config = parse_config_sh(home .. "/.config/hypr/conf/config.sh")
 
 -- Fallbacks if file missing/parse failed (keep Hyprland bootable)
 config.terminal    = config.terminal    or "kitty"
-config.browser     = config.browser     or "zen"
-config.filemanager = config.filemanager or "nautilus"
+config.browser     = config.browser     or "zen-browser"
+config.filemanager = config.filemanager or "nemo"
 config.editor      = config.editor      or "code"
 config.launcher    = config.launcher    or "rofi -show drun -replace -i"
 config.clipboard   = config.clipboard   or (home .. "/.local/bin/cliphist.sh")
 config.wlogout     = config.wlogout     or (home .. "/.local/bin/wlogout-menu.sh")
+config.bar         = config.bar         or "waybar"
 config.hyprscripts = config.hyprscripts or (home .. "/.config/hypr/scripts")
 config.aur_helper  = config.aur_helper  or "yay"
 config.wallpaper_file = config.wallpaper_file or "default.jpg"

@@ -7,7 +7,7 @@
 # exits early with a note — no regen, no hyprctl calls.
 # Updates (all absolute expanded paths, no $HOME leftovers for hypr tools):
 #   hypr/conf/config.sh      -> wallpaper_file=<file>
-#   hypr/hyprpaper.conf      -> preload + wallpaper lines  (managed-by-script comment)
+#   hypr/hyprpaper.conf      -> wallpaper { } block        (managed-by-script comment)
 #   hypr/hyprlock.conf       -> $wallpaper = ...           (managed-by-script comment)
 #   waypaper/config.ini      -> wallpaper = ...            (managed-by-script comment)
 # Then regenerates blurred png + rofi rasi via generate-rofi-wallpaper.sh
@@ -51,8 +51,15 @@ fi
 
 # Early-exit: already current (waypaper fires post_command on every select,
 # including re-selects and --restore) — skip the magick regen + hyprctl calls.
+# Exception: the blurred png is gitignored, so on a fresh clone it is missing
+# even though wallpaper_file is already current — generate it then.
 if [ "${wallpaper_file:-}" = "$file" ]; then
-  echo "Already current: $file (nothing to do)"
+  if [ ! -f "${blurred_wallpaper:-$WALL_DIR/blurred_wallpaper.png}" ]; then
+    echo "Already current: $file, but blurred wallpaper is missing — generating"
+    bash "$GENERATOR"
+  else
+    echo "Already current: $file (nothing to do)"
+  fi
   exit 0
 fi
 
@@ -65,11 +72,17 @@ else
   printf '\nwallpaper_file=%s\n' "$file" >> "$CONF_SH"
 fi
 
-# 2. hyprpaper.conf — hyprpaper needs absolute paths; header marks script ownership
+# 2. hyprpaper.conf — hyprpaper needs absolute paths; header marks script ownership.
+# hyprpaper >= 0.8.5 ignores the old `preload =` / `wallpaper = ,path` lines
+# ("Monitor X has no target: no wp will be created"); it needs a wallpaper
+# block. An empty `monitor =` applies to every monitor.
 {
-  echo "# Managed by set-wallpaper.sh — do not edit preload/wallpaper manually"
-  echo "preload = $abs_path"
-  echo "wallpaper = ,$abs_path"
+  echo "# Managed by set-wallpaper.sh — do not edit the wallpaper block manually"
+  echo "wallpaper {"
+  echo "    monitor ="
+  echo "    path = $abs_path"
+  echo "    fit_mode = cover"
+  echo "}"
   echo "splash = false"
 } > "$HYPRPAPER"
 
@@ -96,11 +109,13 @@ done
 # 5. Blurred png + rofi rasi (reads the just-updated SSOT)
 bash "$GENERATOR"
 
-# 6. Apply live (no reload needed)
+# 6. Apply live (no reload needed). hyprpaper >= 0.8 loads on demand: the
+# old `preload` / `unload` IPC requests were removed and now exit non-zero,
+# which aborted this script under `set -e`. Only `wallpaper` is needed.
+# Non-fatal: config files are already updated, hyprpaper may not be running.
 if command -v hyprctl >/dev/null 2>&1; then
-  hyprctl hyprpaper preload "$abs_path"
-  hyprctl hyprpaper wallpaper ",$abs_path"
-  hyprctl hyprpaper unload unused
+  hyprctl hyprpaper wallpaper ",$abs_path" || \
+    echo "WARNING: could not apply live (is hyprpaper running?) — applies on next start" >&2
 fi
 
 echo "Wallpaper switched to: $file"

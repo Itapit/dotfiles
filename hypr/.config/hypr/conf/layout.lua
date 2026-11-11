@@ -1,5 +1,5 @@
 -- conf/layout.lua — dwindle layout, workspace binds, and gestures
--- https://wiki.hypr.land/Configuring/Layouts/Dwindle-Layout/
+-- https://wiki.hypr.land/configuring/layouts/dwindle-layout/
 -- preserve_split keeps splits on close; 3-finger horizontal swipe cycles workspaces
 
 hl.config({

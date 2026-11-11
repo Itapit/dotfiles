@@ -1,5 +1,5 @@
 -- conf/decoration.lua — rounding, blur, shadow, and opacity
--- https://wiki.hypr.land/Configuring/Basics/Variables/#decoration
+-- https://wiki.hypr.land/configuring/core/config-options/#decoration
 -- Blur xray + ignore_opacity keeps panels readable; shadow adds depth
 
 hl.config({

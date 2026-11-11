@@ -1,0 +1,4 @@
+/* Nordic GTK4 theme for libadwaita apps.
+ * @import (not a symlink): stow rejects absolute links, and url("../assets/...")
+ * inside Nordic resolves relative to Nordic's own dir, so no ~/.config/assets needed. */
+@import url("file:///usr/share/themes/Nordic/gtk-4.0/gtk-dark.css");

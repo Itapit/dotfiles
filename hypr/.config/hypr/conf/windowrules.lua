@@ -4,7 +4,7 @@
 
 -- Tiling / idle
 hl.window_rule({ name = "Chromium-tile",        match = { title = "^Chromium$" }, tile = true })
-hl.window_rule({ name = "idleinhibit-fullscreen", idle_inhibit = "fullscreen" }) -- prevent idle while fullscreen video
+hl.window_rule({ name = "idleinhibit-fullscreen", match = { class = ".*" }, idle_inhibit = "fullscreen" }) -- prevent idle while fullscreen video
 
 -- Floating helpers (file managers, calculators)
 hl.window_rule({ name = "pavucontrol-float",    match = { title = "^pavucontrol$" }, float = true })

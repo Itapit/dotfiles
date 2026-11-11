@@ -17,8 +17,8 @@ rofi_font="${rofi_font:-$font}"
 
 dotfiles_output="$HOME/dotfiles/rofi/.config/rofi/font.rasi"
 
-mkdir -p "$(dirname "$output")"
-printf '/* Generated from hypr/conf/config.sh — do not edit, run generate-rofi-font.sh */\nconfiguration { font: "%s"; }\n' "$rofi_font" > "$output"
+mkdir -p "$(dirname "$dotfiles_output")"
+printf '/* Generated from hypr/conf/config.sh — do not edit, run generate-rofi-font.sh */\nconfiguration { font: "%s"; }\n' "$rofi_font" > "$dotfiles_output"
 
 echo "Rofi font: $rofi_font"
 echo "Generated: $dotfiles_output"

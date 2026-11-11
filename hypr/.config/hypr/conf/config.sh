@@ -5,14 +5,18 @@
 
 # Core apps
 terminal=kitty
-browser=zen
-filemanager=nautilus
+browser=zen-browser
+filemanager=nemo
 editor=code
 
 # Launcher / menus
 launcher="rofi -show drun -replace -i"
 clipboard="$HOME/.local/bin/cliphist.sh"
 wlogout="$HOME/.local/bin/wlogout-menu.sh"
+
+# Status bar — waybar/launch.sh honours the toggle.sh hidden state;
+# waybar itself reads ~/.config/waybar/config.jsonc + style.css
+bar="$HOME/.config/waybar/launch.sh"
 
 # Paths
 hyprscripts="$HOME/.config/hypr/scripts"

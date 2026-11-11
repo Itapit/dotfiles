@@ -1,5 +1,5 @@
 -- conf/misc.lua — misc Hyprland behaviour
--- https://wiki.hypr.land/Configuring/Basics/Variables/#misc
+-- https://wiki.hypr.land/configuring/core/config-options/#misc
 
 hl.config({
   misc = {

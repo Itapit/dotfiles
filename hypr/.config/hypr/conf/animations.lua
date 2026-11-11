@@ -1,5 +1,5 @@
 -- conf/animations.lua — End-4 bezier curves and workspace/window animations
--- https://wiki.hypr.land/Configuring/Advanced-and-Cool/Animations/
+-- https://wiki.hypr.land/configuring/core/animations/
 -- Tweaked md3 + menu curves for popin/slide — edit speed/bezier/style per leaf here.
 
 hl.config({ animations = { enabled = true } })

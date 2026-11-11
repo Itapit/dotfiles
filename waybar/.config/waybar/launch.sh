@@ -18,5 +18,8 @@ if [ -f "$state_dir/disabled" ]; then
     exit 0
 fi
 
-waybar >/dev/null 2>&1 &
+# 200>&- : don't let waybar inherit the lock fd. Otherwise the running bar
+# holds the lock for its whole life and every later launch.sh / toggle.sh
+# exits silently at the flock above (restart and toggle did nothing).
+waybar >/dev/null 2>&1 200>&- &
 disown

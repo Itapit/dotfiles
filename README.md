@@ -73,6 +73,8 @@ Then **log out of Hyprland**, switch to a TTY (`Ctrl+Alt+F3`), log in and run:
 - `--prune` also moves leftover ML4W links (anything pointing into `~/.mydotfiles`) and dead links
   from the old `~/dotfiles/.config` layout. Unrelated links are not touched.
 - Your GTK file-manager bookmarks are carried over; the blurred wallpaper is generated if missing.
+- systemd user units for daemons `autostart.lua` already launches (waybar, hyprpaper, hypridle,
+  swaync) are disabled so they don't start twice; rollback re-enables them.
 - It finishes with `Hyprland --verify-config` on the stowed config.
 - Running it inside a Hyprland session is refused: the live compositor watches `~/.config/hypr`.
 

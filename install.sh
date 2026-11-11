@@ -26,6 +26,9 @@ PACKAGES=(bashrc bin cliphist fastfetch gtk hypr kitty ohmyposh qt rofi swaync
           wallpaper waybar waypaper wlogout)
 BACKUP_ROOT="${XDG_STATE_HOME:-$HOME/.local/state}/dotfiles-backup"
 ML4W_DIR="$HOME/.mydotfiles"
+# Daemons hypr/conf/autostart.lua launches itself. If the same daemon is also
+# an enabled systemd user unit, it runs twice (e.g. two stacked waybars).
+AUTOSTARTED_UNITS=(waybar.service hyprpaper.service hypridle.service swaync.service)
 
 die()  { echo "ERROR: $*" >&2; exit 1; }
 info() { echo ":: $*"; }
@@ -52,6 +55,16 @@ stow_conflicts() {
         die "stow problem install.sh can't resolve by backing up: ${line#  \* }" ;;
     esac
   done <<<"$out"
+}
+
+# Enabled systemd user units that duplicate our autostart, one per line.
+duplicate_units() {
+  command -v systemctl >/dev/null || return 0
+  local u
+  for u in "${AUTOSTARTED_UNITS[@]}"; do
+    [ "$(systemctl --user is-enabled "$u" 2>/dev/null)" = "enabled" ] && echo "$u"
+  done
+  return 0
 }
 
 # Leftover links for --prune: into ~/.mydotfiles, or dead links into the old
@@ -101,6 +114,12 @@ cmd_check() {
     info "With --prune, would also back up these leftover links:"
     while IFS= read -r rel; do echo "   ~/$rel  ($(describe "$rel"))"; done <<<"$prune"
   fi
+  local units
+  units="$(duplicate_units)"
+  if [ -n "$units" ]; then
+    info "Would disable these systemd user units (autostart.lua already launches them):"
+    while IFS= read -r u; do echo "   $u"; done <<<"$units"
+  fi
   hyprland_running && echo "NOTE: Hyprland is running — install must be run from a TTY after logging out."
   return 0
 }
@@ -145,6 +164,19 @@ cmd_install() {
     echo "ERROR: stow failed — restoring the backup so nothing is left half-installed" >&2
     cmd_rollback "$BACKUP" --force
     exit 1
+  fi
+
+  # Units that would double-start what autostart.lua launches (two waybars
+  # stacked on top of each other, two hyprpapers). Recorded for rollback.
+  local units u
+  units="$(duplicate_units)"
+  : >"$BACKUP/disabled-units"
+  if [ -n "$units" ]; then
+    info "Disabling systemd user units that duplicate autostart.lua:"
+    while IFS= read -r u; do
+      systemctl --user disable --now "$u" >/dev/null 2>&1 &&
+        printf '%s\n' "$u" >>"$BACKUP/disabled-units" && echo "   disabled: $u"
+    done <<<"$units"
   fi
 
   # File-manager bookmarks are gitignored (personal paths): carry the old ones over.
@@ -205,6 +237,12 @@ cmd_rollback() {
     mv "$dir/$rel" "$TARGET/$rel"
     echo "   restored: ~/$rel"
   done
+  if [ -s "$dir/disabled-units" ]; then
+    info "Re-enabling systemd user units install.sh disabled:"
+    while IFS= read -r u; do
+      [ -n "$u" ] && systemctl --user enable "$u" >/dev/null 2>&1 && echo "   enabled: $u"
+    done <"$dir/disabled-units"
+  fi
   info "Rollback done."
   # Hyprland >= 0.57 dropped hyprlang: a restored hyprland.conf (e.g. ML4W)
   # won't load unless Hyprland is downgraded too (see README "Rollback").
